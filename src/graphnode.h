@@ -50,7 +50,7 @@ private:
 
 public:
     // constructor / destructor
-    GraphNode(int id);
+    explicit GraphNode(int id);
 
     ~GraphNode();
 
@@ -66,7 +66,7 @@ public:
     int GetNumberOfParents() { return _parentEdges.size(); }
 
     // proprietary functions
-    void AddToken(std::string token); // add answers to list
+    void AddToken(const std::string& token); // add answers to list
     void AddEdgeToParentNode(GraphEdge *edge);
 
     void AddEdgeToChildNode(std::unique_ptr<GraphEdge> &&edge);

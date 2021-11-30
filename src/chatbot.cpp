@@ -36,15 +36,17 @@ ChatBot::ChatBot() {
     _image = nullptr;
     _chatLogic = nullptr;
     _rootNode = nullptr;
+    _currentNode = nullptr;
 }
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(std::string filename) {
+ChatBot::ChatBot(const std::string& filename) {
     std::cout << "ChatBot Constructor" << std::endl;
 
     // invalidate data handles
     _chatLogic = nullptr;
     _rootNode = nullptr;
+    _currentNode = nullptr;
 
     // load image into heap memory
     _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
@@ -119,14 +121,14 @@ ChatBot &ChatBot::operator=(ChatBot &&source) noexcept {
     return *this;
 }
 
-void ChatBot::ReceiveMessageFromUser(std::string message) {
+void ChatBot::ReceiveMessageFromUser(const std::string& message) {
     // loop over all edges and keywords and compute Levenshtein distance to query
     typedef std::pair<GraphEdge *, int> EdgeDist;
     std::vector<EdgeDist> levDists; // format is <ptr,levDist>
 
     for (size_t i = 0; i < _currentNode->GetNumberOfChildEdges(); ++i) {
         GraphEdge *edge = _currentNode->GetChildEdgeAtIndex(i);
-        for (auto keyword: edge->GetKeywords()) {
+        for (const auto& keyword: edge->GetKeywords()) {
             EdgeDist ed{edge, ComputeLevenshteinDistance(keyword, message)};
             levDists.push_back(ed);
         }
@@ -134,7 +136,7 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
 
     // select best fitting edge to proceed along
     GraphNode *newNode;
-    if (levDists.size() > 0) {
+    if (!levDists.empty()) {
         // sort in ascending order of Levenshtein distance (best fit is at the top)
         std::sort(levDists.begin(), levDists.end(),
                   [](const EdgeDist &a, const EdgeDist &b) { return a.second < b.second; });
@@ -176,7 +178,7 @@ int ChatBot::ComputeLevenshteinDistance(std::string s1, std::string s2) {
     if (n == 0)
         return m;
 
-    size_t *costs = new size_t[n + 1];
+    auto *costs = new size_t[n + 1];
 
     for (size_t k = 0; k <= n; k++)
         costs[k] = k;

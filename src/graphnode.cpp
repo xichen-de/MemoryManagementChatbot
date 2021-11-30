@@ -27,11 +27,9 @@ GraphNode::GraphNode(int id) {
     _id = id;
 }
 
-GraphNode::~GraphNode() {
+GraphNode::~GraphNode() = default;
 
-}
-
-void GraphNode::AddToken(std::string token) {
+void GraphNode::AddToken(const std::string& token) {
     _answers.push_back(token);
 }
 

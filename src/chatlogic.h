@@ -66,7 +66,7 @@ public:
     void SetChatbotHandle(ChatBot *chatbot);
 
     // proprietary functions
-    void LoadAnswerGraphFromFile(std::string filename);
+    void LoadAnswerGraphFromFile(const std::string& filename);
 
     void SendMessageToChatbot(std::string message);
 

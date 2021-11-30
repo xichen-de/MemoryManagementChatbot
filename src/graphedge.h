@@ -42,7 +42,7 @@ private:
 
 public:
     // constructor / desctructor
-    GraphEdge(int id);
+    explicit GraphEdge(int id);
 
     // getter / setter
     int GetID() { return _id; }
@@ -52,7 +52,7 @@ public:
     std::vector<std::string> GetKeywords() { return _keywords; }
 
     // proprietary functions
-    void AddToken(std::string token);
+    void AddToken(const std::string& token);
 };
 
 #endif /* GRAPHEDGE_H_ */

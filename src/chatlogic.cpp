@@ -23,8 +23,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <utility>
 #include <vector>
-#include <iterator>
 #include <tuple>
 #include <algorithm>
 
@@ -35,15 +35,17 @@
 
 
 ChatLogic::ChatLogic() {
+    _currentNode = nullptr;
+    _chatBot = nullptr;
+    _panelDialog = nullptr;
 
 }
 
-ChatLogic::~ChatLogic() {
-}
+ChatLogic::~ChatLogic() = default;
 
 template<typename T>
 void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element) {
-    // find all occurences for current node
+    // find all occurrences for current node
     auto token = tokens.begin();
     while (true) {
         token = std::find_if(token, tokens.end(), [&tokenID](const std::pair<std::string, std::string> &pair) {
@@ -58,7 +60,7 @@ void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T 
     }
 }
 
-void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
+void ChatLogic::LoadAnswerGraphFromFile(const std::string& filename) {
     // load file with answer graph elements
     std::ifstream file(filename);
 
@@ -69,7 +71,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
         while (getline(file, lineStr)) {
             // extract all tokens from current line
             tokenlist tokens;
-            while (lineStr.size() > 0) {
+            while (!lineStr.empty()) {
                 // extract next token
                 int posTokenFront = lineStr.find("<");
                 int posTokenBack = lineStr.find(">");
@@ -184,12 +186,12 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
     // identify root node
     GraphNode *rootNode = nullptr;
-    for (auto it = _nodes.begin(); it != _nodes.end(); ++it) {
+    for (auto & _node : _nodes) {
         // search for nodes which have no incoming edges
-        if ((*it)->GetNumberOfParents() == 0) {
+        if (_node->GetNumberOfParents() == 0) {
 
             if (rootNode == nullptr) {
-                rootNode = (*it).get(); // assign current node to root
+                rootNode = _node.get(); // assign current node to root
             } else {
                 std::cout << "ERROR : Multiple root nodes detected" << std::endl;
             }
@@ -212,11 +214,11 @@ void ChatLogic::SetChatbotHandle(ChatBot *chatbot) {
 }
 
 void ChatLogic::SendMessageToChatbot(std::string message) {
-    _chatBot->ReceiveMessageFromUser(message);
+    _chatBot->ReceiveMessageFromUser(std::move(message));
 }
 
 void ChatLogic::SendMessageToUser(std::string message) {
-    _panelDialog->PrintChatbotResponse(message);
+    _panelDialog->PrintChatbotResponse(std::move(message));
 }
 
 wxBitmap *ChatLogic::GetImageFromChatbot() {

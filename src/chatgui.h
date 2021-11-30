@@ -43,7 +43,7 @@ public:
     // constructor / destructor
     ChatBotPanelDialog(wxWindow *parent, wxWindowID id);
 
-    ~ChatBotPanelDialog();
+    ~ChatBotPanelDialog() override;
 
     // getter / setter
     ChatLogic *GetChatLogicHandle() { return _chatLogic.get(); }
@@ -56,9 +56,9 @@ public:
     void render(wxDC &dc);
 
     // proprietary functions
-    void AddDialogItem(wxString text, bool isFromUser = true);
+    void AddDialogItem(const wxString& text, bool isFromUser = true);
 
-    void PrintChatbotResponse(std::string response);
+    void PrintChatbotResponse(const std::string& response);
 
 DECLARE_EVENT_TABLE()
 };
@@ -72,7 +72,7 @@ private:
 
 public:
     // constructor / destructor
-    ChatBotPanelDialogItem(wxPanel *parent, wxString text, bool isFromUser);
+    ChatBotPanelDialogItem(wxPanel *parent, const wxString& text, bool isFromUser);
 };
 
 // frame containing all control elements
@@ -87,7 +87,7 @@ private:
 
 public:
     // constructor / desctructor
-    ChatBotFrame(const wxString &title);
+    explicit ChatBotFrame(const wxString &title);
 };
 
 // control panel for background image display
@@ -97,7 +97,7 @@ class ChatBotFrameImagePanel : public wxPanel {
 
 public:
     // constructor / desctructor
-    ChatBotFrameImagePanel(wxFrame *parent);
+    explicit ChatBotFrameImagePanel(wxFrame *parent);
 
     // events
     void paintEvent(wxPaintEvent &evt);
