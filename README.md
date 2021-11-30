@@ -10,7 +10,7 @@ It is developed and tested on Ubuntu 20.04.
 git clone https://github.com/xichen-de/MemoryManagementChatbot.git
 ``` 
 
-## Dependencies for Running Locally
+## Dependencies
 * cmake >= 3.11
     * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
@@ -41,7 +41,7 @@ cmake ..
 make
 ```
 
-### Running
+## Running
 
 The executable will be placed in the `build` directory. From within `build`, you can run the project as follows:
 
