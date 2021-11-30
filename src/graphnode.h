@@ -66,7 +66,7 @@ public:
     int GetNumberOfParents() { return _parentEdges.size(); }
 
     // proprietary functions
-    void AddToken(const std::string& token); // add answers to list
+    void AddToken(const std::string &token); // add answers to list
     void AddEdgeToParentNode(GraphEdge *edge);
 
     void AddEdgeToChildNode(std::unique_ptr<GraphEdge> &&edge);

@@ -40,7 +40,7 @@ ChatBot::ChatBot() {
 }
 
 // constructor WITH memory allocation
-ChatBot::ChatBot(const std::string& filename) {
+ChatBot::ChatBot(const std::string &filename) {
     std::cout << "ChatBot Constructor" << std::endl;
 
     // invalidate data handles
@@ -121,14 +121,14 @@ ChatBot &ChatBot::operator=(ChatBot &&source) noexcept {
     return *this;
 }
 
-void ChatBot::ReceiveMessageFromUser(const std::string& message) {
+void ChatBot::ReceiveMessageFromUser(const std::string &message) {
     // loop over all edges and keywords and compute Levenshtein distance to query
     typedef std::pair<GraphEdge *, int> EdgeDist;
     std::vector<EdgeDist> levDists; // format is <ptr,levDist>
 
     for (size_t i = 0; i < _currentNode->GetNumberOfChildEdges(); ++i) {
         GraphEdge *edge = _currentNode->GetChildEdgeAtIndex(i);
-        for (const auto& keyword: edge->GetKeywords()) {
+        for (const auto &keyword: edge->GetKeywords()) {
             EdgeDist ed{edge, ComputeLevenshteinDistance(keyword, message)};
             levDists.push_back(ed);
         }

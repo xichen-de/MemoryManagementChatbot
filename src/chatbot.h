@@ -45,7 +45,7 @@ private:
 public:
     // constructors / destructors
     ChatBot();                     // constructor WITHOUT memory allocation
-    explicit ChatBot(const std::string& filename); // constructor WITH memory allocation
+    explicit ChatBot(const std::string &filename); // constructor WITH memory allocation
     ~ChatBot();
 
     ChatBot(const ChatBot &source); // copy constructor
@@ -65,7 +65,7 @@ public:
     wxBitmap *GetImageHandle() { return _image; }
 
     // communication
-    void ReceiveMessageFromUser(const std::string& message);
+    void ReceiveMessageFromUser(const std::string &message);
 };
 
 #endif /* CHATBOT_H_ */

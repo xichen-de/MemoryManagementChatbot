@@ -60,7 +60,7 @@ void ChatLogic::AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T 
     }
 }
 
-void ChatLogic::LoadAnswerGraphFromFile(const std::string& filename) {
+void ChatLogic::LoadAnswerGraphFromFile(const std::string &filename) {
     // load file with answer graph elements
     std::ifstream file(filename);
 
@@ -186,7 +186,7 @@ void ChatLogic::LoadAnswerGraphFromFile(const std::string& filename) {
 
     // identify root node
     GraphNode *rootNode = nullptr;
-    for (auto & _node : _nodes) {
+    for (auto &_node: _nodes) {
         // search for nodes which have no incoming edges
         if (_node->GetNumberOfParents() == 0) {
 

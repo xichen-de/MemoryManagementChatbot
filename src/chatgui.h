@@ -56,9 +56,9 @@ public:
     void render(wxDC &dc);
 
     // proprietary functions
-    void AddDialogItem(const wxString& text, bool isFromUser = true);
+    void AddDialogItem(const wxString &text, bool isFromUser = true);
 
-    void PrintChatbotResponse(const std::string& response);
+    void PrintChatbotResponse(const std::string &response);
 
 DECLARE_EVENT_TABLE()
 };
@@ -72,7 +72,7 @@ private:
 
 public:
     // constructor / destructor
-    ChatBotPanelDialogItem(wxPanel *parent, const wxString& text, bool isFromUser);
+    ChatBotPanelDialogItem(wxPanel *parent, const wxString &text, bool isFromUser);
 };
 
 // frame containing all control elements

@@ -143,7 +143,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
 
 ChatBotPanelDialog::~ChatBotPanelDialog() = default;
 
-void ChatBotPanelDialog::AddDialogItem(const wxString& text, bool isFromUser) {
+void ChatBotPanelDialog::AddDialogItem(const wxString &text, bool isFromUser) {
     // add a single dialog element to the sizer
     auto *item = new ChatBotPanelDialogItem(this, text, isFromUser);
     _dialogSizer->Add(item, 0, wxALL | (isFromUser ? wxALIGN_LEFT : wxALIGN_RIGHT), 8);
@@ -161,7 +161,7 @@ void ChatBotPanelDialog::AddDialogItem(const wxString& text, bool isFromUser) {
     this->DoScroll(0, sy);
 }
 
-void ChatBotPanelDialog::PrintChatbotResponse(const std::string& response) {
+void ChatBotPanelDialog::PrintChatbotResponse(const std::string &response) {
     // convert string into wxString and add dialog element
     wxString botText(response.c_str(), wxConvUTF8);
     AddDialogItem(botText, false);
@@ -188,7 +188,7 @@ void ChatBotPanelDialog::render(wxDC &dc) {
     dc.DrawBitmap(_image, 0, 0, false);
 }
 
-ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, const wxString& text, bool isFromUser)
+ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, const wxString &text, bool isFromUser)
         : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(-1, -1), wxBORDER_NONE) {
     // retrieve image from chatbot
     wxBitmap *bitmap =
