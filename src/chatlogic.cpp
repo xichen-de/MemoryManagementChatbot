@@ -162,11 +162,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
                         if (parentToken != tokens.end() && childToken != tokens.end()) {
                             // get iterator on incoming and outgoing node via ID search
-                            auto parentNode = std::find_if(_nodes.get()->begin(), _nodes.get()->end(),
+                            auto parentNode = std::find_if(_nodes->begin(), _nodes->end(),
                                                            [&parentToken](GraphNode *node) {
                                                                return node->GetID() == std::stoi(parentToken->second);
                                                            });
-                            auto childNode = std::find_if(_nodes.get()->begin(), _nodes.get()->end(),
+                            auto childNode = std::find_if(_nodes->begin(), _nodes->end(),
                                                           [&childToken](GraphNode *node) {
                                                               return node->GetID() == std::stoi(childToken->second);
                                                           });
@@ -204,7 +204,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
 
     // identify root node
     GraphNode *rootNode = nullptr;
-    for (auto it = _nodes.get()->begin(); it != _nodes.get()->end(); ++it) {
+    for (auto it = _nodes->begin(); it != _nodes->end(); ++it) {
         // search for nodes which have no incoming edges
         if ((*it)->GetNumberOfParents() == 0) {
 
