@@ -63,14 +63,27 @@ ChatBot::~ChatBot() {
 
 ChatBot::ChatBot(const ChatBot &source) {
     std::cout << "ChatBot Copy Constructor" << std::endl;
-    _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
     _image = source._image;
+    *_image = *source._image;
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+
 }
 
 ChatBot &ChatBot::operator=(const ChatBot &source) {
     std::cout << "ChatBot Copy Assignment Constructor" << std::endl;
-    return *this = ChatBot(source);
+    if (this == &source) {
+        return *this;
+    }
+    _rootNode = source._rootNode;
+    _image = source._image;
+    *_image = *source._image;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
+    return *this;
 }
 
 ChatBot::ChatBot(ChatBot &&source) noexcept {
@@ -78,18 +91,31 @@ ChatBot::ChatBot(ChatBot &&source) noexcept {
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
     _image = source._image;
+    *_image = *source._image;
+    _currentNode = source._currentNode;
+
     source._chatLogic = nullptr;
     source._rootNode = nullptr;
-    source._image = nullptr;
-
-
+    source._image = NULL;
+    source._currentNode = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 }
 
 ChatBot &ChatBot::operator=(ChatBot &&source) noexcept {
     std::cout << "ChatBot Move Assignment Constructor" << std::endl;
-    std::swap(_chatLogic, source._chatLogic);
-    std::swap(_rootNode, source._rootNode);
-    std::swap(_image, source._image);
+    if (this == &source)
+        return *this;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _image = source._image;
+    *_image = *source._image;
+    _currentNode = source._currentNode;
+
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._image = NULL;
+    source._currentNode = nullptr;
+    _chatLogic->SetChatbotHandle(this);
     return *this;
 }
 
