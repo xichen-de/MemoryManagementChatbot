@@ -156,7 +156,7 @@ void ChatBotPanelDialog::AddDialogItem(wxString text, bool isFromUser) {
     this->SetScrollRate(5, 5);
     this->Layout();
 
-    // scroll to bottom to show newest element
+    // scroll to bottom to show the newest element
     int dx, dy;
     this->GetScrollPixelsPerUnit(&dx, &dy);
     int sy = dy * this->GetScrollLines(wxVERTICAL);
