@@ -36,9 +36,7 @@
 
 ChatLogic::ChatLogic() {
     _currentNode = nullptr;
-    _chatBot = nullptr;
     _panelDialog = nullptr;
-
 }
 
 ChatLogic::~ChatLogic() = default;
