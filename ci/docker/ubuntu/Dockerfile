@@ -20,4 +20,4 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Install dependencies
 SHELL ["/bin/bash", "-c"]
 RUN apt-get update -q && \
-    apt-get install -yq libwxgtk3.0-dev libwxgtk3.0-0v5-dbg
+    apt-get install -yq libwxgtk3.0-gtk3-dev libwxgtk3.0-gtk3-0v5
